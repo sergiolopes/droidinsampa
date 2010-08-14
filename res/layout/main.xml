@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Layout principal da tela 
+ -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF">
+
+	<!-- 
+		Imagem do topo da tela com logo do evento.
+		
+		O width é o máximo possível da tela e o height escala 
+		proporcionalmente. Aponta para o arquivo 'topo' dos drawables.
+	 -->
+	<ImageView 
+	    android:src="@drawable/topo"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content"
+   	 	/>
+   	 
+	<!-- 
+		Lista de tweets a ser exibida
+	 -->   	 
+  	 <ListView
+		android:id="@+id/tweets"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		/>
+
+</LinearLayout>
