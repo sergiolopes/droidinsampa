@@ -1,0 +1,13 @@
+Projeto apresentado no Dev In Sampa 2010.
+Demo do Android acessando uma busca no Twitter.
+
+O código está simples e todo documentado com muitos comentários e explicações.
+Veja em especial:
+
+- DroidInSampa.java
+- main.xml
+- linha.xml
+
+Veja também o curso de Android da Caelum em http://caelum.com.br/curso/fj57
+
+![Screenshot da aplicação rodando](http://github.com/sergiolopes/droidinsampa/raw/master/screenshot.png)
