@@ -34,13 +34,13 @@ import com.twitterapime.search.SearchDevice;
 import com.twitterapime.search.Tweet;
 
 /**
- * Implementação completa do DroidInSampa com alguns recursos a mais que na palestra.
- * Essa versão executa a cada 2 min a busca e atualiza a ListView com os dados mais recentes
+ * Implementa√ß√£o completa do DroidInSampa com alguns recursos a mais que na palestra.
+ * Essa vers√£o executa a cada 2 min a busca e atualiza a ListView com os dados mais recentes
  * 
- * Todo o código está bem documentado e quebrado em pequenos métodos com nomes grandes
- * e legíveis para facilitar a compreensão.
+ * Todo o c√≥digo est√° bem documentado e quebrado em pequenos m√©todos com nomes grandes
+ * e leg√≠veis para facilitar a compreens√£o.
  * 
- * @author Sérgio Lopes - @sergio_caelum
+ * @author S√©rgio Lopes - @sergio_caelum
  * @see http://www.caelum.com.br
  */
 public class DroidInSampa extends Activity {
@@ -48,7 +48,7 @@ public class DroidInSampa extends Activity {
 	// representa a lista colocada no main.xml
 	private ListView listaDeTweets;
 	
-	// lista de tweets a serem exibidos; é uma lista de objetos do tipo linha
+	// lista de tweets a serem exibidos; √© uma lista de objetos do tipo linha
     private Vector<View> linhas = new Vector<View>();
 
     // timer para executar as chamadas com frequencia
@@ -58,7 +58,7 @@ public class DroidInSampa extends Activity {
     private String ultimoId = "0";
     
 	/**
-	 * Método do Android que é chamado quando a aplicação inicia
+	 * M√©todo do Android que √© chamado quando a aplica√ß√£o inicia
 	 */
     public @Override void onCreate(Bundle savedInstanceState) {
         inicializacaoDaAplicacaoEVariaveis(savedInstanceState);
@@ -77,9 +77,9 @@ public class DroidInSampa extends Activity {
 				final Tweet[] tweets = chamaTwitter();
 				final List<View> linhas = montaLinhasNovas(tweets);
 				
-				// (importante, avançado)
-				// Dispara a atualização da tela (ListView) na Thread de UI do Android.
-				// Não podemos mexer na tela em uma thread diferente da UI-thread
+				// (importante, avan√ßado)
+				// Dispara a atualiza√ß√£o da tela (ListView) na Thread de UI do Android.
+				// N√£o podemos mexer na tela em uma thread diferente da UI-thread
 				runOnUiThread(new Runnable() {
 					public void run() {
 						populaList(linhas);
@@ -97,10 +97,10 @@ public class DroidInSampa extends Activity {
 		// busca por todos os termos, ...
 		Query query = QueryComposer.containAll("@sergio_caelum #devinsampa");
 		
-		// ... com no máximo 50 resultados, ...
+		// ... com no m√°ximo 50 resultados, ...
 		query = QueryComposer.append(query, QueryComposer.resultCount(50));
 		
-		// ... e só os que chegaram desde a ultima checagem
+		// ... e s√≥ os que chegaram desde a ultima checagem
 		query = QueryComposer.append(query, QueryComposer.sinceID(ultimoId));
 	
 		try {
@@ -147,21 +147,21 @@ public class DroidInSampa extends Activity {
 			stream.close();
 			foto.setImageBitmap(bmp);
 			
-			// ao clicar na foto, abre o profile do usuário no browser
+			// ao clicar na foto, abre o profile do usu√°rio no browser
 			foto.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					abreBrowser(tweet.getString("TWEET_AUTHOR_URI"));
 				}
 			});
 		} catch (IOException e) {
-			Log.i("DroidInSampa", "Problemas ao baixar a foto do usuário, ignorando ele");
+			Log.i("DroidInSampa", "Problemas ao baixar a foto do usu√°rio, ignorando ele");
 			e.printStackTrace();
 		}
 	}
 
 	// deve ser chamado na UI-Thread
 	private void populaList(final List<View> novasLinhas) {
-		// adiciona novas linhas no início da lista pre-existente
+		// adiciona novas linhas no in√≠cio da lista pre-existente
 		linhas.addAll(0, novasLinhas);
 		
 		// atualiza a lista com os novos tweets
@@ -181,7 +181,7 @@ public class DroidInSampa extends Activity {
 			mp.start();
 		}
 		
-		// mostra um Toast (popup) com o número de novos tweets
+		// mostra um Toast (popup) com o n√∫mero de novos tweets
 		Toast.makeText(this, twts.length + " novos tweets", Toast.LENGTH_SHORT).show();
 	}
 	
@@ -191,7 +191,7 @@ public class DroidInSampa extends Activity {
 		startActivity(i);
 	}
 
-	// quando usuário sair da tela, desliga o programa
+	// quando usu√°rio sair da tela, desliga o programa
 	protected @Override void onPause() {
 		super.onPause();
 		System.exit(0);
