@@ -25,14 +25,20 @@ import com.twitterapime.search.Tweet;
  */
 public class DroidInSampa extends ListActivity {
 
-	// timer para buscar novos tweets periódicamente
+	/**
+	 * Timer para buscar novos tweets periódicamente
+	 */
 	private Timer timer = new Timer();
 
-	// Classe que acessa o twitter
+	/**
+	 * Classe que acessa o twitter
+	 */
 	private TwitterClient twitter = new TwitterClient(
 			"@sergio_caelum #devinsampa");
 
-	// Método do Android que é chamado quando a aplicação inicia
+	/**
+	 * Método do Android que é chamado quando a aplicação inicia
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		inicializacaoDaAplicacaoELayout(savedInstanceState);
