@@ -19,18 +19,22 @@ import android.widget.TextView;
 
 import com.twitterapime.search.Tweet;
 
+/**
+ * Subclasse de ArrayAdapter para manipular a lista de Tweets na tela
+ * 
+ * @author Jonas Alves
+ */
 public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 
 	public TweetArrayAdapter(Context context, int resource,
 			int textViewResourceId) {
 		super(context, resource, textViewResourceId);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * A ViewHolder vai guardar a referência para as views mais acessadas, para
-	 * que usemos o View.findViewById apenas uma vez, pois ele é <b>muito</b>
-	 * custoso.
+	 * A ViewHolder vai guardar a referência para as views mais acessadas para
+	 * que não precisemos usar o View.findViewById várias vezes, pois esse
+	 * método é muito custoso.
 	 * 
 	 * @author Jonas Alves
 	 */
@@ -40,9 +44,9 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 	}
 
 	/**
-	 * Cria uma nova view que representa um Tweet na lista.<br />
-	 * Caso esteja disponível, aproveitamos a <i>convertView</i>, pois criar uma
-	 * nova é sempre mais custoso.
+	 * Cria uma nova view que representará um Tweet na lista.<br />
+	 * Se estiver disponível, a <i>convertView</i> será aproveitada, pois inflar
+	 * uma nova é <b>muito</b> mais custoso.
 	 * 
 	 * @return View: A view que representará o tweet na lista.
 	 */
@@ -76,11 +80,23 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		});
 	}
 
+	/**
+	 * Monta o texto que será exibido no campo de texto da linha
+	 * 
+	 * @param Tweet
+	 * @return String: o texto
+	 */
 	private String montarTexto(Tweet tweet) {
 		return tweet.getString("TWEET_CONTENT") + ": "
 				+ tweet.getString("TWEET_AUTHOR_USERNAME");
 	}
 
+	/**
+	 * Faz download e retorna a imagem do autor do tweet
+	 * 
+	 * @param tweet
+	 * @return Bitmap a imagem do autor do tweet
+	 */
 	private Bitmap montarFoto(final Tweet tweet) {
 		String fotoURI = tweet.getString("TWEET_AUTHOR_PICTURE_URI");
 
@@ -104,16 +120,19 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 	}
 
 	/**
-	 * Infla uma nova view <i>R.layout.linha</i> e seu ViewHolder.
+	 * Infla uma nova view <i>R.layout.linha</i> e cria seu ViewHolder.
 	 * 
 	 * @return View: a nova view com ViewHolder
 	 */
 	private View inflateWithHolder() {
 		View view = View.inflate(getContext(), R.layout.linha, null);
+
 		ViewHolder holder = new ViewHolder();
 		holder.texto = (TextView) view.findViewById(R.id.texto);
 		holder.foto = (ImageView) view.findViewById(R.id.foto);
+
 		view.setTag(holder);
+
 		return view;
 	}
 
