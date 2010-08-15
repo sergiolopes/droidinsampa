@@ -15,7 +15,6 @@
         </activity>
 
     </application>
-    <uses-sdk android:minSdkVersion="2" />
     
     <!-- Permissão para uso da Internet -->
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
