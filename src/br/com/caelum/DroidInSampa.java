@@ -88,9 +88,6 @@ public class DroidInSampa extends ListActivity {
 		for (Tweet tweet : novosTweets) {
 			adapter.insert(tweet, 0);
 		}
-
-		// atualiza a lista com os novos tweets
-		setListAdapter(adapter);
 	}
 
 	/**
@@ -101,8 +98,11 @@ public class DroidInSampa extends ListActivity {
 	 */
 	private TweetArrayAdapter getAdapter() {
 		TweetArrayAdapter adapter = (TweetArrayAdapter) getListAdapter();
-		if (adapter == null)
+		
+		if (adapter == null) {
 			adapter = new TweetArrayAdapter(this, R.layout.linha, R.id.texto);
+			setListAdapter(adapter);
+		}
 
 		return adapter;
 	}
