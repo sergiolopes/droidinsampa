@@ -9,7 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,11 +20,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,10 +42,7 @@ import com.twitterapime.search.Tweet;
  * @author Sérgio Lopes - @sergio_caelum
  * @see http://www.caelum.com.br
  */
-public class DroidInSampa extends Activity {
-	
-	// representa a lista colocada no main.xml
-	private ListView listaDeTweets;
+public class DroidInSampa extends ListActivity {
 	
 	// lista de tweets a serem exibidos; é uma lista de objetos do tipo linha
     private Vector<View> linhas = new Vector<View>();
@@ -68,7 +64,6 @@ public class DroidInSampa extends Activity {
     private void inicializacaoDaAplicacaoEVariaveis(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.main);
-	    listaDeTweets = (ListView) findViewById(R.id.tweets);
 	}
 
 	private void disparaTaskBackground() {
@@ -165,7 +160,7 @@ public class DroidInSampa extends Activity {
 		linhas.addAll(0, novasLinhas);
 		
 		// atualiza a lista com os novos tweets
-		listaDeTweets.setAdapter(new ArrayAdapter<View>(this, android.R.layout.simple_list_item_1, linhas) {
+		setListAdapter(new ArrayAdapter<View>(this, android.R.layout.simple_list_item_1, linhas) {
 			public View getView(int position, View convertView, ViewGroup parent) {
 				return linhas.get(position);
 			}
