@@ -2,6 +2,7 @@ package br.com.caelum;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,7 +32,7 @@ import com.twitterapime.search.Tweet;
 public class DroidInSampa extends ListActivity {
 
 	// lista de tweets a serem exibidos; é uma lista de objetos do tipo linha
-	private List<Tweet> tweets = new ArrayList<Tweet>();
+	// private List<Tweet> tweets = new ArrayList<Tweet>();
 
 	// timer para executar as chamadas com frequencia
 	private Timer timer = new Timer();
@@ -71,7 +72,7 @@ public class DroidInSampa extends ListActivity {
 				});
 			}
 		};
-		timer.schedule(background, 0, 1000 * 60 * 2);
+		timer.schedule(background, 0, 1000 * 60 * 1);
 	}
 
 	private List<Tweet> chamaTwitter() {
@@ -84,6 +85,7 @@ public class DroidInSampa extends ListActivity {
 		query = QueryComposer.append(query, QueryComposer.resultCount(50));
 
 		// ... e só os que chegaram desde a ultima checagem
+		query = QueryComposer.append(query, QueryComposer.sinceID(ultimoId));
 		query = QueryComposer.append(query, QueryComposer.sinceID(ultimoId));
 
 		List<Tweet> novosTweets = new ArrayList<Tweet>();
@@ -100,12 +102,33 @@ public class DroidInSampa extends ListActivity {
 
 	// deve ser chamado na UI-Thread
 	private void populaList(final List<Tweet> novosTweets) {
+		TweetArrayAdapter adapter = getAdapter();
+
+		// Inverte a ordem da lista de novos tweets para que os mais recentes
+		// fiquem sempre acima
+		Collections.reverse(novosTweets);
+
 		// adiciona novos tweets no início da lista pre-existente
-		tweets.addAll(0, novosTweets);
+		for (Tweet tweet : novosTweets) {
+			adapter.insert(tweet, 0);
+		}
 
 		// atualiza a lista com os novos tweets
-		setListAdapter(new TweetArrayAdapter(this, R.layout.linha, R.id.texto,
-				tweets));
+		setListAdapter(adapter);
+	}
+
+	/**
+	 * Recupera o ListAdapter relacionado à Activity. Se este não existir, um
+	 * novo é criado.
+	 * 
+	 * @return TweetArrayAdapter
+	 */
+	private TweetArrayAdapter getAdapter() {
+		TweetArrayAdapter adapter = (TweetArrayAdapter) getListAdapter();
+		if (adapter == null)
+			adapter = new TweetArrayAdapter(this, R.layout.linha, R.id.texto);
+
+		return adapter;
 	}
 
 	private void notificacoes(List<Tweet> tweets) {

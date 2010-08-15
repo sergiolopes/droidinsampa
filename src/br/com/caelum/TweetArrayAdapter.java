@@ -3,7 +3,6 @@ package br.com.caelum;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,8 +22,9 @@ import com.twitterapime.search.Tweet;
 public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 
 	public TweetArrayAdapter(Context context, int resource,
-			int textViewResourceId, List<Tweet> objects) {
-		super(context, resource, textViewResourceId, objects);
+			int textViewResourceId) {
+		super(context, resource, textViewResourceId);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
