@@ -59,10 +59,10 @@ public class DroidInSampa extends ListActivity {
 				runOnUiThread(new Runnable() {
 					public void run() {
 						populaList(novosTweets);
-						tocaSom(novosTweets);
 						mostraQuantidadeNaTela(novosTweets);
 					}
 				});
+				tocaSom(novosTweets);
 			}
 		};
 		timer.schedule(background, 0, 1000 * 60 * 1);
