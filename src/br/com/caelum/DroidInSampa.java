@@ -72,6 +72,10 @@ public class DroidInSampa extends Activity {
 	}
 
 	private void disparaTaskBackground() {
+		
+		String[] itens = {"Sérgio Lopes", "Caelum", "@sergio_caelum"};
+		
+		System.out.println(itens);
 		TimerTask background = new TimerTask() {
 			public void run() {
 				final Tweet[] tweets = chamaTwitter();
@@ -95,7 +99,7 @@ public class DroidInSampa extends Activity {
 		SearchDevice search = SearchDevice.getInstance();
 		
 		// busca por todos os termos, ...
-		Query query = QueryComposer.containAll("@sergio_caelum #devinsampa");
+		Query query = QueryComposer.containAll("#wtjatai");
 		
 		// ... com no máximo 50 resultados, ...
 		query = QueryComposer.append(query, QueryComposer.resultCount(50));
